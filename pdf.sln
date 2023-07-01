@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33423.256
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pdf", "pdf\pdf.csproj", "{1BF18160-6DC0-49DD-947A-F4D0E16E7010}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cyotek.GhostScript", "..\..\..\Downloads\Cyotek.GhostScript\Cyotek.GhostScript.csproj", "{66780A35-8FD2-40D8-A647-6B7C6856C9EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cyotek.GhostScript.PdfConversion", "..\..\..\Downloads\Cyotek.GhostScript.PdfConversion\Cyotek.GhostScript.PdfConversion.csproj", "{59BB29B1-BE36-4116-8F11-9E9446781D43}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BF18160-6DC0-49DD-947A-F4D0E16E7010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BF18160-6DC0-49DD-947A-F4D0E16E7010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BF18160-6DC0-49DD-947A-F4D0E16E7010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BF18160-6DC0-49DD-947A-F4D0E16E7010}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66780A35-8FD2-40D8-A647-6B7C6856C9EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66780A35-8FD2-40D8-A647-6B7C6856C9EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66780A35-8FD2-40D8-A647-6B7C6856C9EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66780A35-8FD2-40D8-A647-6B7C6856C9EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59BB29B1-BE36-4116-8F11-9E9446781D43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59BB29B1-BE36-4116-8F11-9E9446781D43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59BB29B1-BE36-4116-8F11-9E9446781D43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59BB29B1-BE36-4116-8F11-9E9446781D43}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D0512694-04C3-4DAD-9147-24805AEFDCCB}
+	EndGlobalSection
+EndGlobal
