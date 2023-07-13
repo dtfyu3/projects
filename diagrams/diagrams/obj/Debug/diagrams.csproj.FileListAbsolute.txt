@@ -1,0 +1,10 @@
+C:\xscript\projects\diagrams\diagrams\bin\Debug\diagrams.exe.config
+C:\xscript\projects\diagrams\diagrams\bin\Debug\diagrams.exe
+C:\xscript\projects\diagrams\diagrams\bin\Debug\diagrams.pdb
+C:\xscript\projects\diagrams\diagrams\obj\Debug\diagrams.csproj.AssemblyReference.cache
+C:\xscript\projects\diagrams\diagrams\obj\Debug\diagrams.Form1.resources
+C:\xscript\projects\diagrams\diagrams\obj\Debug\diagrams.Properties.Resources.resources
+C:\xscript\projects\diagrams\diagrams\obj\Debug\diagrams.csproj.GenerateResource.cache
+C:\xscript\projects\diagrams\diagrams\obj\Debug\diagrams.csproj.CoreCompileInputs.cache
+C:\xscript\projects\diagrams\diagrams\obj\Debug\diagrams.exe
+C:\xscript\projects\diagrams\diagrams\obj\Debug\diagrams.pdb
