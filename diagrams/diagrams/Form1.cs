@@ -49,12 +49,11 @@ namespace diagrams
         const int radius = 150;
         float maxArea = 0;
         float maxPossibleArea = 0;
-        public void ButtonClick(Button button, NumericUpDown numericUpDown, Graphics g, PictureBox pictureBox, List<NumericUpDown> list)
+        public void ButtonClick(Button button, NumericUpDown numericUpDown, ref Graphics g, ref PictureBox pictureBox, List<NumericUpDown> list)
         {
             Size size = new Size(pictureBox.Width, pictureBox.Height);
             Point zero = new Point() { X = 0, Y = 0 };
             Rectangle rect = new Rectangle(zero, size);
-            pictureBox.DrawToBitmap(bitmap, rect);
             button.Enabled = false;
             numericUpDown.Enabled = false;
             int dem = (int)numericUpDown.Value;
@@ -108,6 +107,7 @@ namespace diagrams
 
             }
             maxPossibleArea = GetPolygonArea(points);
+            pictureBox.DrawToBitmap(bitmap, rect);
             pictureBox.Invalidate();
         }
         public void RandomInput(List<NumericUpDown> list)
@@ -176,11 +176,11 @@ namespace diagrams
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            ButtonClick(button1, numericUpDown1, graphics1, pictureBox1, list);
+            ButtonClick(button1, numericUpDown1, ref graphics1, ref pictureBox1, list);
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            ButtonClick(button2, numericUpDown2, graphics2, pictureBox2, list1);
+            //ButtonClick(button2, numericUpDown2, graphics2, pictureBox2, list1);
         }
         private void button3_Click(object sender, EventArgs e)
         {
@@ -195,7 +195,7 @@ namespace diagrams
         {
             score[polynumber][index] = (float)value;
         }
-        public void DrawString(float value, float x, float y, int index, bool flag, Graphics g, int polynumber)
+        public void DrawString(float value, float x, float y, int index, bool flag, ref Graphics g, int polynumber)
         {
             g = Graphics.FromImage(pictureBox1.Image);
             if (polynumber > 0 && flag != false)
@@ -217,24 +217,8 @@ namespace diagrams
             }
             if (flag == true)
                 g.DrawString($"{value}", new Font("Microsoft Sans Serif", 8), Brushes.Black, x, y);
-            else
-            {
-                g = Graphics.FromImage(pictureBox1.Image);
-                graphics1.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                for (int i = 0; i < polynumber; i++)
-                {
-                    g.DrawString($"{value}", new Font("Microsoft Sans Serif", 8), new SolidBrush(backGroundColor), x, y);
-                    g.DrawString($"{value}", new Font("Microsoft Sans Serif", 8), new SolidBrush(backGroundColor), x, y);
-                    g.DrawString($"{value}", new Font("Microsoft Sans Serif", 8), new SolidBrush(backGroundColor), x, y);
-                    g.DrawString($"{value}", new Font("Microsoft Sans Serif", 8), new SolidBrush(backGroundColor), x, y);
-                    g.DrawString($"{value}", new Font("Microsoft Sans Serif", 8), new SolidBrush(backGroundColor), x, y);
-                    g.DrawString($"{value}", new Font("Microsoft Sans Serif", 8), new SolidBrush(backGroundColor), x, y);
-                    g.DrawString($"{value}", new Font("Microsoft Sans Serif", 8), new SolidBrush(backGroundColor), x, y);
-                }
-
-            }
         }
-        public void DrawPoint(float value, int i, int index, Graphics g, PictureBox p, ref int polynumber, Point[] polygon, float[] score)
+        public void DrawPoint(float value, int i, int index, ref Graphics g, ref PictureBox p, ref int polynumber, Point[] polygon, float[] score)
         {
             float a = value / 10.0f;
             float x2;
@@ -250,7 +234,7 @@ namespace diagrams
                     AddPolygonPoints(x2, y2, index, polygon);
                     SetLabelValues(value, index, polynumber);
                     if(a > 0.0)
-                        DrawString(value, x2 - 6, 0, index, true, g, polynumber);
+                        DrawString(value, x2 - 6, 0, index, true, ref g, polynumber);
                     p.Invalidate();
                 }
                 else
@@ -262,7 +246,7 @@ namespace diagrams
                     //g.FillEllipse(Brushes.Black, new Rectangle(x1 - 3, y1 - 3, 5, 5));
                     //g.DrawEllipse(newpen, x2, y2, 1, 1);
                     if(a > 0.0)
-                        DrawString(value, x2 - 6, radius * 2 + startPositionY + 5, index, true, g, polynumber);
+                        DrawString(value, x2 - 6, radius * 2 + startPositionY + 5, index, true, ref g, polynumber);
                     p.Invalidate();
                 }
             }
@@ -277,7 +261,7 @@ namespace diagrams
                     SetLabelValues(value, index, polynumber);
                     //g.DrawEllipse(newpen, x2, y2, 1, 1);
                     if (a > 0.0)
-                        DrawString(value, 0, y2 - 5, index, true, g, polynumber);
+                        DrawString(value, 0, y2 - 5, index, true, ref g, polynumber);
                     p.Invalidate();
                 }
                 else
@@ -288,7 +272,7 @@ namespace diagrams
                     SetLabelValues(value, index, polynumber);
                     //g.DrawEllipse(newpen, x2, y2, 1, 1);
                     if (a > 0.0)
-                        DrawString(value, radius * 2 + startPositionX + 10, y2 - 5, index, true, g, polynumber);
+                        DrawString(value, radius * 2 + startPositionX + 10, y2 - 5, index, true, ref g, polynumber);
                     p.Invalidate();
                 }
             }
@@ -316,14 +300,14 @@ namespace diagrams
                         AddPolygonPoints(x2, y2, index, polygonsList[polynumber]);
                         SetLabelValues(value, index, polynumber);
                         if(a > 0.0)
-                            DrawString(value, points[i].X - 25, points[i].Y - 10, index, true, g, polynumber);
+                            DrawString(value, points[i].X - 25, points[i].Y - 10, index, true, ref g, polynumber);
                     }
                     else //4 плоскость
                     {
                         AddPolygonPoints(x2, y2, index, polygonsList[polynumber]);
                         SetLabelValues(value, index, polynumber);
                         if(a > 0.0)
-                            DrawString(value, points[i].X - 17, points[i].Y + 3, index, true, g, polynumber);
+                            DrawString(value, points[i].X - 17, points[i].Y + 3, index, true, ref g, polynumber);
                     }
                 else
                 {
@@ -332,14 +316,14 @@ namespace diagrams
                         AddPolygonPoints(x2, y2, index, polygonsList[polynumber]);
                         SetLabelValues(value, index, polynumber);
                         if(a > 0.0)
-                            DrawString(value, points[i].X + 5, points[i].Y - 7, index, true, g, polynumber);
+                            DrawString(value, points[i].X + 5, points[i].Y - 7, index, true, ref g, polynumber);
                     }
                     else //3 плоскость
                     {
                         AddPolygonPoints(x2, y2, index, polygonsList[polynumber]);
                         SetLabelValues(value, index, polynumber);
                         if(a > 0.0)
-                            DrawString(value, points[i].X + 5, points[i].Y, index, true, g, polynumber);
+                            DrawString(value, points[i].X + 5, points[i].Y, index, true, ref g, polynumber);
                     }
                 }
                 AddPolygonPoints(x2, y2, index, polygonsList[polynumber]);
@@ -359,11 +343,12 @@ namespace diagrams
                 color = Color.FromArgb(255, rnd.Next(0, 256), rnd.Next(0, 256), rnd.Next(0, 256));
             return color;
         }
-        public void PaintButtonClick(PictureBox p, Graphics g, NumericUpDown numericUpDown, List<NumericUpDown> list, ref int polynumber)
+        public void PaintButtonClick(ref PictureBox p, ref Graphics g, NumericUpDown numericUpDown, List<NumericUpDown> list, ref int polynumber)
         {
+            g = Graphics.FromImage(p.Image);
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             label1.ForeColor = Color.Black;
             Random rnd = new Random();
-            
             float area;
             area = GetPolygonArea(polygonsList[polynumber]);
             for (int i = 0; i < polygonsList.Count; i++)
@@ -389,12 +374,7 @@ namespace diagrams
             {
                 if (area >= maxArea) //if current polygon is the biggest, clearing pictbox to blank circle, then drawing each polygon
                 {
-                    g.Clear(backGroundColor);
                     p.Image = bitmap;
-                    for (int i = 0; i < eraser.Length; i++)
-                    {
-                        DrawString(score[0][i], eraser[i].X, eraser[i].Y, 0, false, graphics1, polynumber);
-                    }
                     p.Invalidate();
                     g = Graphics.FromImage(p.Image);
                     g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
@@ -419,6 +399,8 @@ namespace diagrams
                     for (int i = 0; i < tempList.Count; i++)
                     {
                         color = GetColor(tempList.Count, i, rnd);
+                        g = Graphics.FromImage(p.Image);
+                        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                         g.DrawPolygon(new Pen(Color.Black, 1), tempList[i]);
                         g.FillPolygon(new SolidBrush(color), tempList[i]);
                     }
@@ -441,7 +423,7 @@ namespace diagrams
         }
         private void button4_Click(object sender, EventArgs e)
         {
-            PaintButtonClick(pictureBox1, graphics1, numericUpDown1, list, ref polyNumber);
+            PaintButtonClick(ref pictureBox1, ref graphics1, numericUpDown1, list, ref polyNumber);
             polygonsList.Add(new Point[(int)numericUpDown1.Value]);
             score.Add(new float[(int)numericUpDown1.Value]);
         }
@@ -456,46 +438,46 @@ namespace diagrams
             sum += polygon[n - 1].X * (polygon[0].Y - polygon[n - 2].Y);
             return 0.5f * sum;
         }
-        public void HandleNumericInput(KeyPressEventArgs e, NumericUpDown numericUpDown, int i, Graphics g, PictureBox p, ref int polynumber)
+        public void HandleNumericInput(KeyPressEventArgs e, NumericUpDown numericUpDown, int i, ref Graphics g, ref PictureBox p, ref int polynumber)
         {
 
             if (e.KeyChar == ((char)Keys.Enter))
             {
-                DrawPoint((float)numericUpDown.Value, i, i, g, p, ref polynumber, polygonsList[polynumber], score[polynumber]);
+                DrawPoint((float)numericUpDown.Value, i, i, ref g, ref p, ref polynumber, polygonsList[polynumber], score[polynumber]);
                 numericUpDown.Enabled = false;
             }
         }
         private void numericUpDown3_KeyPress(object sender, KeyPressEventArgs e)
         {
-            HandleNumericInput(e, numericUpDown3, 0, graphics1, pictureBox1, ref polyNumber);
+            HandleNumericInput(e, numericUpDown3, 0, ref graphics1, ref pictureBox1, ref polyNumber);
         }
         private void numericUpDown4_KeyPress(object sender, KeyPressEventArgs e)
         {
-            HandleNumericInput(e, numericUpDown4, 1, graphics1, pictureBox1, ref polyNumber);
+            HandleNumericInput(e, numericUpDown4, 1, ref graphics1, ref pictureBox1, ref polyNumber);
         }
         private void numericUpDown5_KeyPress(object sender, KeyPressEventArgs e)
         {
-            HandleNumericInput(e, numericUpDown5, 2, graphics1, pictureBox1, ref polyNumber);
+            HandleNumericInput(e, numericUpDown5, 2, ref graphics1, ref pictureBox1, ref polyNumber);
         }
         private void numericUpDown6_KeyPress(object sender, KeyPressEventArgs e)
         {
-            HandleNumericInput(e, numericUpDown6, 3, graphics1, pictureBox1, ref polyNumber);
+            HandleNumericInput(e, numericUpDown6, 3, ref graphics1, ref pictureBox1, ref polyNumber);
         }
         private void numericUpDown7_KeyPress(object sender, KeyPressEventArgs e)
         {
-            HandleNumericInput(e, numericUpDown7, 4, graphics1, pictureBox1, ref polyNumber);
+            HandleNumericInput(e, numericUpDown7, 4, ref graphics1, ref pictureBox1, ref polyNumber);
         }
         private void numericUpDown8_KeyPress(object sender, KeyPressEventArgs e)
         {
-            HandleNumericInput(e, numericUpDown8, 5, graphics1, pictureBox1, ref polyNumber);
+            HandleNumericInput(e, numericUpDown8, 5, ref graphics1, ref pictureBox1, ref polyNumber);
         }
         private void numericUpDown9_KeyPress(object sender, KeyPressEventArgs e)
         {
-            HandleNumericInput(e, numericUpDown9, 6, graphics1, pictureBox1, ref polyNumber);
+            HandleNumericInput(e, numericUpDown9, 6, ref graphics1, ref pictureBox1, ref polyNumber);
         }
         private void numericUpDown10_KeyPress(object sender, KeyPressEventArgs e)
         {
-            HandleNumericInput(e, numericUpDown10, 7, graphics1, pictureBox1, ref polyNumber);
+            HandleNumericInput(e, numericUpDown10, 7, ref graphics1, ref pictureBox1, ref polyNumber);
         }
         private void button5_Click(object sender, EventArgs e)
         {
@@ -503,35 +485,35 @@ namespace diagrams
         }
         private void numericUpDown11_KeyPress(object sender, KeyPressEventArgs e)
         {
-            HandleNumericInput(e, numericUpDown11, 0, graphics2, pictureBox2, ref polyNumber2);
+            HandleNumericInput(e, numericUpDown11, 0, ref graphics2, ref pictureBox2, ref polyNumber2);
         }
         private void numericUpDown12_KeyPress(object sender, KeyPressEventArgs e)
         {
-            HandleNumericInput(e, numericUpDown12, 1, graphics2, pictureBox2, ref polyNumber2);
+            HandleNumericInput(e, numericUpDown12, 1, ref graphics2, ref pictureBox2, ref polyNumber2);
         }
         private void numericUpDown13_KeyPress(object sender, KeyPressEventArgs e)
         {
-            HandleNumericInput(e, numericUpDown13, 2, graphics2, pictureBox2, ref polyNumber2);
+            HandleNumericInput(e, numericUpDown13, 2, ref graphics2, ref pictureBox2, ref polyNumber2);
         }
         private void numericUpDown14_KeyPress(object sender, KeyPressEventArgs e)
         {
-            HandleNumericInput(e, numericUpDown14, 3, graphics2, pictureBox2, ref polyNumber2);
+            HandleNumericInput(e, numericUpDown14, 3, ref graphics2, ref pictureBox2, ref polyNumber2);
         }
         private void numericUpDown15_KeyPress(object sender, KeyPressEventArgs e)
         {
-            HandleNumericInput(e, numericUpDown15, 4, graphics2, pictureBox2, ref polyNumber2);
+            HandleNumericInput(e, numericUpDown15, 4, ref graphics2, ref pictureBox2, ref polyNumber2);
         }
         private void numericUpDown16_KeyPress(object sender, KeyPressEventArgs e)
         {
-            HandleNumericInput(e, numericUpDown16, 5, graphics2, pictureBox2, ref polyNumber2);
+            HandleNumericInput(e, numericUpDown16, 5, ref graphics2, ref pictureBox2, ref polyNumber2);
         }
         private void numericUpDown17_KeyPress(object sender, KeyPressEventArgs e)
         {
-            HandleNumericInput(e, numericUpDown17, 6, graphics2, pictureBox2, ref polyNumber2);
+            HandleNumericInput(e, numericUpDown17, 6, ref graphics2, ref pictureBox2, ref polyNumber2);
         }
         private void numericUpDown18_KeyPress(object sender, KeyPressEventArgs e)
         {
-            HandleNumericInput(e, numericUpDown18, 7, graphics2, pictureBox2, ref polyNumber2);
+            HandleNumericInput(e, numericUpDown18, 7, ref graphics2, ref pictureBox2, ref polyNumber2);
         }
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
