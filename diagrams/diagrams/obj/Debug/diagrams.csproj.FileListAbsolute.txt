@@ -8,13 +8,3 @@ C:\xscript\projects\diagrams\diagrams\obj\Debug\diagrams.csproj.GenerateResource
 C:\xscript\projects\diagrams\diagrams\obj\Debug\diagrams.csproj.CoreCompileInputs.cache
 C:\xscript\projects\diagrams\diagrams\obj\Debug\diagrams.exe
 C:\xscript\projects\diagrams\diagrams\obj\Debug\diagrams.pdb
-C:\projects\diagrams\diagrams\bin\Debug\diagrams.exe.config
-C:\projects\diagrams\diagrams\bin\Debug\diagrams.exe
-C:\projects\diagrams\diagrams\bin\Debug\diagrams.pdb
-C:\projects\diagrams\diagrams\obj\Debug\diagrams.csproj.AssemblyReference.cache
-C:\projects\diagrams\diagrams\obj\Debug\diagrams.Form1.resources
-C:\projects\diagrams\diagrams\obj\Debug\diagrams.Properties.Resources.resources
-C:\projects\diagrams\diagrams\obj\Debug\diagrams.csproj.GenerateResource.cache
-C:\projects\diagrams\diagrams\obj\Debug\diagrams.csproj.CoreCompileInputs.cache
-C:\projects\diagrams\diagrams\obj\Debug\diagrams.exe
-C:\projects\diagrams\diagrams\obj\Debug\diagrams.pdb
