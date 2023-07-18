@@ -40,7 +40,7 @@ namespace diagrams
         readonly Pen newpen = new Pen(Color.FromArgb(100, Color.Blue), 1);
         int polyNumber = 0;
         int polyNumber2 = 0;
-        int maxPolygonCount = 100;
+        int maxPolygonCount = 10;
         List<Point[]> polygonsList = new List<Point[]>();
         List<float[]> score = new List<float[]>();
         readonly int x1 = startPositionX + radius;
@@ -63,7 +63,6 @@ namespace diagrams
             }
             points = new Point[dem];
             polygon = new Point[dem];
-            //eraser = new PointF[dem];
             polygonsList.Add(polygon);
             score.Add(new float[dem]);
             DrawStartCircle(g);
@@ -151,6 +150,7 @@ namespace diagrams
                 numericUpDown2.Enabled = true;
                 polygonsList.Clear();
                 score.Clear();
+                maxArea = 0;
             }
             else
             {
@@ -213,11 +213,6 @@ namespace diagrams
                     g.DrawString($"{score[polynumber - 1][index]}", new Font("Microsoft Sans Serif", 8), new SolidBrush(backGroundColor), x, y);
                 }
             }
-            //if (polynumber == 0)
-            //{
-            //    eraser[index].X = x;
-            //    eraser[index].Y = y;
-            //}
             if (flag == true)
                 g.DrawString($"{value}", new Font("Microsoft Sans Serif", 8), Brushes.Black, x, y);
         }
